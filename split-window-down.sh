@@ -9,10 +9,10 @@ next_pane_id=${next_pane_id:1}
 
 
 if [[ $current_pane_id -eq $next_pane_id ]]; then
-  tmux split-window -v
+  tmux split-window -v -c "#{pane_current_path}"
 elif [[ $next_pane_id -lt $current_pane_id ]]; then
   tmux select-pane -U
-  if [ $(tmux split-window -v) ]; then
+  if [ $(tmux split-window -v -c "#{pane_current_path}") ]; then
     tmux display-message -p "not enough space"
   else
     true
